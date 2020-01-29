@@ -1,0 +1,77 @@
+<html lang="en"><head>
+        
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">          
+    
+        <!-- Bootstrap core CSS -->
+        <link rel="stylesheet" href="./static/css/bootstrap.min.css">
+        <link rel="stylesheet" href="./static/css/signin.css">
+
+
+    
+    <title>  | Todo Application</title>
+
+    
+  
+
+</head>
+<body class="text-center">
+
+    
+<form  method="POST" onsubmit="return signin();" class="form-signin">
+  
+  <h1 class="h3 mb-3 font-weight-normal">Basqa Proyekt</h1>
+  <input type="hidden" name="csrfmiddlewaretoken" value="jmoptvPcJC7sNYN6EK9NiGXJsee3UdyJl5B5ty4Tz3Mah9qFyNi9M5RB8iwF9K7T">
+  <input type="text" name="username" class="form-control" placeholder="Username" maxlength="150" required="" id="id_username">
+<input type="password" name="password" class="form-control" placeholder="Password" required="" id="id_password">
+
+  <div class="checkbox mb-3">
+    <label>
+      <input type="checkbox" value="remember-me"> Remember me
+    </label>
+  </div>
+  <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+  <p class="mt-5 mb-3 text-muted">© 2020</p>
+</form>
+
+
+
+    
+<script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+    
+<script>
+
+    var form = document.querySelector('form');
+    function signin(){
+        let username = form.querySelector('[name=username]').value;
+        let password = form.querySelector('[name=password]').value;
+        
+        var data = {
+                'username': username,
+                'password': password,
+            };
+            console.log(data);
+        $.ajax({
+            url: 'http://localhost:8000/api-login/',
+            method:'POST',
+            data: data,
+            success: function(result){
+                if (result.hasOwnProperty('token')){
+                  localStorage.setItem('token', result['token']);
+                  window.location = "http://127.0.0.1:5500/tasks.html"
+                }
+            },
+            errors: function(result){
+              console.log(result);
+            }
+        });
+        return false;
+    };
+
+</script>
+
+</body></html>

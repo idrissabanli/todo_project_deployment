@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<div class="row">
+    
+<div class="col-md-8 list-group">
+    <h6>Assigned Tasks</h6>
+        {% for task in task_list %}
+        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+          <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-1">{{task.title }}</h5>
+            <small>3 days ago</small>
+          </div>
+          <p class="mb-1">{{task.description }}</p>
+          <small>{{task.owner.first_name}} {{task.owner.last_name}}</small>
+        </a>
+        {% endfor %}
+      </div>
+
+      <div class="col-md-4 list-group">
+            <h6>My Tasks</h6>
+            
+            {% for task in my_tasks %}
+            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                    <div class="d-flex w-100 justify-content-between">
+                      <h5 class="mb-1">{{task.title }}</h5>
+                      <small>3 days ago</small>
+                    </div>
+                    <p class="mb-1">{{task.description }}</p>
+                    <small>{{task.owner.first_name}} {{task.owner.last_name}}</small>
+                  </a>
+            {% endfor %}
+            <br>
+            <a class="btn btn-info" href="">See More</a>
+            <br>
+        <a class="btn btn-success" href="{% url 'todo:create_task' %}">Create Your Task</a>
+          </div>
+    </div>
+{% endblock %}

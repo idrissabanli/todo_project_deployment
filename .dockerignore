@@ -1,0 +1,5 @@
+.venv/
+.vscode/
+login.html
+tasks.html
+postgresdb/

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+        <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">          
+    
+        <!-- Bootstrap core CSS -->
+        <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+    <title>{% block title %} {% endblock %} | Todo Application</title>
+
+    {% block css %}
+
+    {% endblock %}
+</head>
+<body {% block body_class %} {% endblock %}>
+
+    {% block full_content %}
+        <h1>Header-i var</h1>
+        <section class="container">
+        {% block content %}
+            <h1>Content Block</h1>
+        {% endblock %}
+
+        </section>
+
+   
+        <h1>footer-i var</h1>
+
+    {% endblock %}
+
+    {% block js %}
+
+    {% endblock %}
+    
+</body>
+</html>

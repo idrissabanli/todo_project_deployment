@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h1>My tasks</h1>
+    <ul id="mytasks">
+
+    </ul>
+
+    <script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+
+    <script>
+    $.ajax({
+            url: 'http://localhost:8000/api-tasks/',
+            method:'GET',
+            success: function(result){
+                console.log(result);
+                var section = document.getElementById('mytasks');
+                for (var i=0; i<result.length; i++){
+                    var li = document.createElement('li');
+                    li.innerText = result[i].title;
+                    section.appendChild(li);
+                }
+                console.log(result.status);
+            },
+            headers:{
+                'Authorization': `Token ${localStorage.getItem('token')}`,
+            },
+            error: function(result){
+                console.log('saknkal')
+              console.log(result);
+              if (result.status ===401){
+                window.location = "http://127.0.0.1:5500/login.html"
+              }
+            }
+        });
+    </script>
+</body>
+</html>
