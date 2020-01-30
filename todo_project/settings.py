@@ -25,10 +25,7 @@ SECRET_KEY = '9lj05hxxbkb7q(!!%l)7s0q40$o0#hiqpijrn6+e3un4p+-&8w'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = not os.environ.get('DEBUG', False)
 
-print(DEBUG)
-print(type(DEBUG))
-
-PRODUCTION = not bool(DEBUG)
+PRODUCTION = not DEBUG
 
 ALLOWED_HOSTS = ['*']
 
@@ -77,21 +74,20 @@ MIDDLEWARE = [
 
 # CELERY STUFF
 
-if PRODUCTION:
-    CELERY_BROKER_URL = 'redis://redis:6379'
-    CELERY_RESULT_BACKEND = 'redis://redis:6379'
-    CELERY_ACCEPT_CONTENT = ['application/json']
-    CELERY_TASK_SERIALIZER = 'json'
-    CELERY_RESULT_SERIALIZER = 'json'
-    CELERY_TIMEZONE = 'Asia/Baku'
-
-else:
-    CELERY_BROKER_URL = 'redis://localhost:6379'
-    CELERY_RESULT_BACKEND = 'redis://localhost:6379'
-    CELERY_ACCEPT_CONTENT = ['application/json']
-    CELERY_TASK_SERIALIZER = 'json'
-    CELERY_RESULT_SERIALIZER = 'json'
-    CELERY_TIMEZONE = 'Asia/Baku'
+# if PRODUCTION:
+CELERY_BROKER_URL = 'redis://redis:6379'
+CELERY_RESULT_BACKEND = 'redis://redis:6379'
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TIMEZONE = 'Asia/Baku'
+# else:
+#     CELERY_BROKER_URL = 'redis://localhost:6379'
+#     CELERY_RESULT_BACKEND = 'redis://localhost:6379'
+#     CELERY_ACCEPT_CONTENT = ['application/json']
+#     CELERY_TASK_SERIALIZER = 'json'
+#     CELERY_RESULT_SERIALIZER = 'json'
+#     CELERY_TIMEZONE = 'Asia/Baku'
 
 
 CORS_ORIGIN_ALLOW_ALL = True
