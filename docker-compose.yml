@@ -56,5 +56,6 @@ services:
       - .:/code
     depends_on: 
       - "redis"
+      - "postgres"
 
   
