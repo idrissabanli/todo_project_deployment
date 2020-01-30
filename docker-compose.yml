@@ -40,7 +40,7 @@ services:
     environment:
       - VIRTUAL_HOST=localhost, 130.211.208.82
       - VIRTUAL_PORT=8000
-      - DEBUG=False
+      - DEBUG=True
 
   redis:
     image: redis
