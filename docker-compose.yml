@@ -57,5 +57,8 @@ services:
     depends_on: 
       - "redis"
       - "postgres"
+    links:
+      - "redis"
+      - "postgres"
 
   
