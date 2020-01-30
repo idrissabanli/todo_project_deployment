@@ -40,10 +40,21 @@ services:
     environment:
       - VIRTUAL_HOST=localhost, 130.211.208.82
       - VIRTUAL_PORT=8000
+      - DEBUG = False
 
+  redis:
+    image: redis
+    restart: "always"
+    ports: 
+      - 6379:6379
 
-  # redis_container:
-  #   image: redis
-  #   restart: "always"
-  #   ports: 
-  #     - 6379:6379
+  celery: 
+    build: 
+      context: .
+      dockerfile: celery.dockerfile
+    volumes:
+      - .:/code
+    depends_on: 
+      - "redis"
+
+  
