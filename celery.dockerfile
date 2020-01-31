@@ -4,6 +4,6 @@ RUN mkdir -p /code
 WORKDIR /code
 ADD . .
 
-RUN pip install -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
 
 CMD [ "celery", "-A", "todo_project", "worker", "--beat", "--scheduler", "django", "--loglevel=info" ]
