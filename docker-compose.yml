@@ -40,7 +40,7 @@ services:
     environment:
       - VIRTUAL_HOST=localhost, 130.211.208.82
       - VIRTUAL_PORT=8000
-      - DEBUG=True
+      - DEBUG=False
 
   redis:
     image: redis
@@ -54,11 +54,15 @@ services:
       dockerfile: celery.dockerfile
     volumes:
       - .:/code
+
+    environment:
+      - DEBUG=False
+    links:
+      - redis
+      - postgres
     depends_on: 
       - "redis"
       - "postgres"
-    links:
-      - "redis"
-      - "postgres"
+
 
   

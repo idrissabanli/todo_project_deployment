@@ -25,9 +25,13 @@ SECRET_KEY = '9lj05hxxbkb7q(!!%l)7s0q40$o0#hiqpijrn6+e3un4p+-&8w'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = not os.environ.get('DEBUG', False)
 
-print(DEBUG)
-PRODUCTION = not bool(DEBUG)
-print(PRODUCTION)
+print('environ', os.environ.get('DEBUG'))
+print('DEBUG', DEBUG)
+print('DEBUG type', type(DEBUG))
+PRODUCTION = not DEBUG
+
+print('PRODUCTION', PRODUCTION)
+print('type', type(PRODUCTION))
 ALLOWED_HOSTS = ['*']
 
 
@@ -73,22 +77,6 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-# CELERY STUFF
-
-# if PRODUCTION:
-CELERY_BROKER_URL = 'redis://redis:6379'
-CELERY_RESULT_BACKEND = 'redis://redis:6379'
-CELERY_ACCEPT_CONTENT = ['application/json']
-CELERY_TASK_SERIALIZER = 'json'
-CELERY_RESULT_SERIALIZER = 'json'
-CELERY_TIMEZONE = 'Asia/Baku'
-# else:
-#     CELERY_BROKER_URL = 'redis://localhost:6379'
-#     CELERY_RESULT_BACKEND = 'redis://localhost:6379'
-#     CELERY_ACCEPT_CONTENT = ['application/json']
-#     CELERY_TASK_SERIALIZER = 'json'
-#     CELERY_RESULT_SERIALIZER = 'json'
-#     CELERY_TIMEZONE = 'Asia/Baku'
 
 
 CORS_ORIGIN_ALLOW_ALL = True
@@ -141,7 +129,6 @@ if PRODUCTION:
             'PASSWORD': '12345',
             'HOST': 'postgres',
             'PORT': 5432,
-            
         }
     }
 else:
@@ -153,7 +140,6 @@ else:
             'PASSWORD': '12345',
             'HOST': '127.0.0.1',
             'PORT': 5432,
-            
         }
     }
 
@@ -213,7 +199,22 @@ else:
         os.path.join(BASE_DIR, 'static')
     ]
 
+# CELERY STUFF
 
+if PRODUCTION:
+    CELERY_BROKER_URL = 'redis://redis:6379'
+    CELERY_RESULT_BACKEND = 'redis://redis:6379'
+    CELERY_ACCEPT_CONTENT = ['application/json']
+    CELERY_TASK_SERIALIZER = 'json'
+    CELERY_RESULT_SERIALIZER = 'json'
+    CELERY_TIMEZONE = 'Asia/Baku'
+else:
+    CELERY_BROKER_URL = 'redis://localhost:6379'
+    CELERY_RESULT_BACKEND = 'redis://localhost:6379'
+    CELERY_ACCEPT_CONTENT = ['application/json']
+    CELERY_TASK_SERIALIZER = 'json'
+    CELERY_RESULT_SERIALIZER = 'json'
+    CELERY_TIMEZONE = 'Asia/Baku'
 
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'tech.academy.user2@gmail.com'
