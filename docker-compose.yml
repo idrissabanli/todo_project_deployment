@@ -54,15 +54,14 @@ services:
       dockerfile: celery.dockerfile
     volumes:
       - .:/code
-
-    environment:
-      - DEBUG=False
     links:
       - redis
       - postgres
     depends_on: 
       - "redis"
       - "postgres"
+    environment:
+      - DEBUG=False
 
 
   
